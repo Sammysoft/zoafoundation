@@ -1,0 +1,43 @@
+.more-info{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 30px 10px;
+}
+
+.About-info{
+ flex: 1;
+ width: auto;
+ height: 50vh;
+ padding: 10px;
+ color: grey;
+ box-shadow: 8px 10px 18px #88888888;
+}
+#search{
+  border: 2px solid blue; 
+  background: white; 
+  width: 25%; 
+  margin-left: 15%; 
+  border-radius: 5px; 
+  font-size: 0.9rem
+}
+
+.main{
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/appreciate.jpg');
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-width: 500px){
+  #search{
+    width: 70%;
+  }
+  .more-info{
+    display: flex;
+    flex-direction: column;
+  }
+  .About{
+    width: 100%;
+  }
+}

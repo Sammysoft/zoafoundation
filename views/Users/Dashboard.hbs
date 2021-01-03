@@ -1,0 +1,68 @@
+
+
+<div class="dashboard">
+    <div class="board">
+        <img id="profileImage" src="/images/appreciate.jpg" alt="Profile Picture" />
+        <div class="options"><span>Profile<span style="float: right"><i class="fa fa-user-o"></i></span></div>
+        <div class="options"><span>Activities<span style="float: right"><i class="fa fa-calendar-o"></i></span></div>
+        <div class="options"><span>Notifications<span style="float: right"><i class="fa fa-bell-o"></i></span></div>
+    </div>
+    <div class="mainDash">
+        <nav style="background-color: whitesmoke; width: 100%; height: 10vh; ">
+            <span style="width: 100%;"><span style="padding-left: 60%; font-size: 1.5rem;">Welcome, <i class="fa fa-user-circle-o" style="color: grey; padding: 5px;"></i><span class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: black"></a>
+            <ul class="dropdown-menu" style="padding: 10px; font-size: 1rem;">
+                <li style="cursor: pointer"><i class="fa fa-pencil"></i> Edit Profile </li><hr/>
+                <li style="cursor: pointer"><i class="fa fa-users"></i> Members</li><hr/>
+                <li style="cursor: pointer"><i class="fa fa-sign-out"></i> Logout </li><hr/>
+            </ul>
+            </span></span>
+        </nav>
+
+
+    </div>
+</div>
+
+<style type="text/css">
+    nav{
+        background-color: black;
+        width: 100%;
+        height: 20vh;
+    }
+    .board{
+        background-color: black;
+        
+        height: 100vh;
+        float: left;
+        z-index: 9999;
+    }
+
+    .options{
+        margin: 10px;
+        padding: 5px;
+        color: white;
+        font-family: 'Raleway';
+        font-weight: bolder;
+        font-size: 2rem;
+        border-top: 2px solid grey;
+        border-top: 2px solid grey;
+    }
+    
+    #profileImage{
+        border-radius: 50%;
+        border: 2px solid blue;
+        width: 60%;
+        height: 30%;
+        z-index: 9999;
+        padding-left: 10px;
+    }
+    .dashboard{
+        display: flex;
+        justify-content: space-between;
+    }
+    .mainDash{
+        flex: 4;
+    }
+    .board{
+        flex: 1;
+    }
+</style>

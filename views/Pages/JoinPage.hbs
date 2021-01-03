@@ -1,0 +1,207 @@
+<div class="container">
+    <div class="form-header">
+        Register To Join Us Today
+    </div>
+    <div class="form-wrapper">
+        <form action="/Join" autocomplete="off">
+          <label>Image Url</label>
+            <progress value="50" max="100" style="height: 30px; width: 100%"></progress>
+            <input type="hidden" id="filename" class="form-control" type="text" name="ImageUrl" placeholder="wait for alert"  class="form-control">
+             <div class="form-group">
+            <div class="img-wrapper">
+                <div class="img-inner">
+                    <input type="file" id="file">
+                    <label  for="file"  id="cancelBtn1"> 
+                        <i id="plus" class="fa fa-plus fa-2x"></i>
+                    </label>
+                    <label for="file" id="cancelBtn2"> 
+                        <i id="check" onclick="uploadfile()" class="fa fa-paper-plane fa-2x"></i>
+                    </label>
+                    <img src="/images/profileIcon.jpeg" alt="" id="photo"/>
+                </div>
+            </div>
+        <div class="form-group">
+            <input class="form-control" name="FirstName" type="text" placeholder="First Name:"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="LastName" type="text" placeholder="SurName:"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="PhoneNumber" type="Number" placeholder="Phone Number"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="DOB" type="Date" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="Quote" type="text" placeholder="Giving is better than recieving..." />
+        </div>
+        <div class="form-group">
+            <input class="form-control btn-primary" type="Submit"  />
+        </div>
+
+    </form>
+    </div>
+</div>
+
+<style type="text/css">
+    .form-header{
+        text-align: center;
+        font-size: 1.5rem;
+       
+    }
+    body{
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('/images/appreciate.jpg');
+        background-repeat: no-repeat;
+        background-position: 100%;
+        background-size: cover;
+    }
+    .form-wrapper{
+        width: 50%;
+        height: 100vh;
+        margin: auto;
+    }
+    .form-header{
+        color: blue;
+        padding: 10px;
+        
+    }
+    #file{
+    display: none;
+    }
+    .form-control{
+        border: none;
+        border-radius: 0px;
+        padding: 10px;
+    }
+    .img-inner{
+    background-color: transparent;
+    overflow: hidden;
+    position: fixed;
+    top: 10%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    margin: auto;
+    height: 100px;
+}
+#photo{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+#cancelBtn1{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(5%);
+    bottom: -5px;
+    color: blue;
+    background-color: transparent;
+}
+#cancelBtn2{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(2%);
+    bottom: -5px;
+    color: blue;
+    background-color: transparent;
+}
+#uploadBtn{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #303133;
+    bottom: -8px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 0.4rem;
+}
+
+
+
+
+@media screen and (max-width: 500px){
+    .form-wrapper{
+        width: 90%;
+    }
+}
+</style>
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-storage.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+
+
+<script>
+    //Declaring variable by DOM elements
+    const file = document.querySelector('#file');
+    const img = document.querySelector('#photo');
+    const check = document.querySelector('#cancelBtn2');
+    const plus = document.querySelector('#cancelBtn1');
+
+    //Handling the change in file Upload
+    check.style.display = "none"
+    file.addEventListener('change', function(){
+        const choosedFile =  this.files[0];
+
+        if(choosedFile){
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function(){
+                img.setAttribute('src', reader.result);
+            });
+
+            reader.readAsDataURL(choosedFile);
+            plus.style.display = 'none';
+            check.style.display = 'block';
+        }
+    })
+
+
+
+
+
+
+
+
+
+    // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA47dEI6Sw9LPNl8AtdDizlKd2yONkaN74",
+    authDomain: "file-uploads-55ed9.firebaseapp.com",
+    databaseURL: "https://file-uploads-55ed9.firebaseio.com",
+    projectId: "file-uploads-55ed9",
+    storageBucket: "file-uploads-55ed9.appspot.com",
+    messagingSenderId: "928347985917",
+    appId: "1:928347985917:web:656280c8e7ac73bdb5eb94",
+    measurementId: "G-SM107ESEYH"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  console.log(firebase)
+  function uploadfile(){
+    const ref = firebase.storage().ref()
+    const file = document.querySelector('#file').files[0]
+    const name = new Date() + '-' + file.name
+    const metadata = {
+      contentType: file.type
+    }
+    const task = ref.child(name).put(file,metadata)
+    task
+    .then(snapshot=> snapshot.ref.getDownloadURL())
+    .then(url=>{
+      console.log(url)
+      document.querySelector("#filename").value = url
+      alert('image uploaded succesfully')
+    })
+  }
+</script>
